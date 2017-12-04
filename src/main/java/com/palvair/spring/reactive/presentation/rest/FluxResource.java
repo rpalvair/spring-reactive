@@ -11,18 +11,20 @@ import static java.time.Duration.ofMillis;
 @RequestMapping("/reactive/flux")
 public class FluxResource {
 
+    private static final int MAX_VALUE = 100;
+
     @GetMapping("/count")
     public Flux<String> generateFlux() {
         return Flux.interval(ofMillis(100))
                 .onBackpressureBuffer(10)
                 .map(index -> index + 1)
                 .map(this::ajouterVirgule)
-                .limitRequest(30);
+                .limitRequest(MAX_VALUE);
     }
 
     private String ajouterVirgule(final Long index) {
-        if (index < 30) {
-            return index + ",";
+        if (index < MAX_VALUE) {
+            return index + "\n";
         }
         return String.valueOf(index);
     }
