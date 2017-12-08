@@ -17,6 +17,13 @@ spring:
 
 logging:
   level:
-    com.heyou: DEBUG
+    com.palvair: DEBUG
     com.netflix.eureka: OFF
     com.netflix.discovery: OFF
+
+
+cxf:
+ path : /cxf
+ jaxrs:
+  component-scan: true
+  classes-scan-packages: com.palvair.spring.reactive
